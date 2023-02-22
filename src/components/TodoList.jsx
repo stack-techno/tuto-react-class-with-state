@@ -8,10 +8,8 @@ export class TodoList extends React.Component {
   alertDeleteTodo = () => {
     if (this.props.isDeleted) {
       return (
-        <div
-        className="alert alert-success" role="alert"
-        >
-           Todo supprimé avec succès!.
+        <div className="alert alert-success" role="alert">
+          Todo supprimé avec succès!.
         </div>
       );
     }
@@ -20,13 +18,13 @@ export class TodoList extends React.Component {
     return (
       <>
         {this.alertDeleteTodo()}
-        <table className="table">
-          {JSON.stringify(this.props.isDeleted)}
+        <table className="table table-striped">
           <thead>
             <tr>
               <th scope="col">#id</th>
               <th scope="col">Titre</th>
-              <th scope="col">Completed</th>
+              <th scope="col">Completée ?</th>
+              <th scope="col">Actions</th>
             </tr>
           </thead>
           <tbody>
@@ -34,7 +32,13 @@ export class TodoList extends React.Component {
               <tr key={index}>
                 <td>{todo.id}</td>
                 <td>{todo.title}</td>
-                <td>{todo.completed ? " oui" : "non"}</td>
+                <td>
+                  {todo.completed ? (
+                    <span class="badge text-bg-success">Oui</span>
+                  ) : (
+                    <span class="badge text-bg-secondary">Non</span>
+                  )}
+                </td>
                 <td>
                   <button
                     type="button"

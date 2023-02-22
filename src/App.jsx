@@ -72,7 +72,7 @@ export default class App extends React.Component {
               {" "}
               <button
                 type="button"
-                className="btn btn-primary"
+                className="my-3"
                 onClick={this.handleRefresh}
               >
                 Rafraichir
