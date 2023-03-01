@@ -1,12 +1,10 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-export class TodoList extends React.Component {
-  constructor(props) {
-    super(props);
-  }
-  alertDeleteTodo = () => {
-    if (this.props.isDeleted) {
+export const TodoList =(props)=>{
+  
+  const alertDeleteTodo = () => {
+    if (props.isDeleted) {
       return (
         <div className="alert alert-success" role="alert">
           Todo supprimé avec succès!.
@@ -14,10 +12,10 @@ export class TodoList extends React.Component {
       );
     }
   };
-  render() {
+
     return (
       <>
-        {this.alertDeleteTodo()}
+        {alertDeleteTodo()}
         <table className="table table-striped">
           <thead>
             <tr>
@@ -28,22 +26,22 @@ export class TodoList extends React.Component {
             </tr>
           </thead>
           <tbody>
-            {this.props.todos.map((todo, index) => (
+            {props.todos?.map((todo, index) => (
               <tr key={index}>
                 <td>{todo.id}</td>
                 <td>{todo.title}</td>
                 <td>
                   {todo.completed ? (
-                    <span class="badge text-bg-success">Oui</span>
+                    <span className="badge text-bg-success">Oui</span>
                   ) : (
-                    <span class="badge text-bg-secondary">Non</span>
+                    <span className="badge text-bg-secondary">Non</span>
                   )}
                 </td>
                 <td>
                   <button
                     type="button"
                     className="btn btn-danger"
-                    onClick={() => this.props.handleDelete(todo.id)}
+                    onClick={() => props.handleDelete(todo.id)}
                   >
                     Supprimer
                   </button>
@@ -54,7 +52,7 @@ export class TodoList extends React.Component {
         </table>
       </>
     );
-  }
+  
 }
 
 TodoList.propTypes = {
