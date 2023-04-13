@@ -1,8 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
-import { Input, Spacer } from "@nextui-org/react";
-import img from "../assets/stage.jpg"
+import { Input } from "@nextui-org/react";
 import axios from "axios";
-import "./login.style.css"
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -38,25 +36,14 @@ const Login = () => {
       })
       .catch((e) => console.log("ereur..", e));
   };
-  useEffect(() => {
-    if (user !== undefined) {
-      localStorage.setItem("access_token", JSON.stringify(user.access_token));
-    }
-  }, [user]);
+ 
   return (
     <div className="container mt-5">
-
-      <div className="card__container">
-        <img src={img} alt="img" />
-        <div className="orverlay">
-          <h4>Mon article</h4>
-        </div>
-      </div>
       <div className="row">
         <div className="col-md-6 offset-md-3">
           <form method="post" onSubmit={handleSubmit}>
+            {JSON.stringify(user)}
             <h1>Creer votre compte</h1>
-            <Spacer y={2} />
             <Input
               clearable
               bordered
@@ -67,29 +54,17 @@ const Login = () => {
               value={email}
               onChange={(e) => setEmail(e.target.value)}
             />
-            <Spacer y={2} />
-            <Input
-              clearable
-              bordered
-              labelPlaceholder="Email"
-              color="warning"
-              shadow={false}
-              width="100%"
-              value={username}
-              onChange={(e) => setUserName(e.target.value)}
-            />
-            <Spacer y={2} />
-            <Input
-              clearable
-              bordered
-              labelPlaceholder="Email"
-              color="warning"
-              shadow={false}
-              width="100%"
-              value={username}
-              onChange={(e) => setUserName(e.target.value)}
-            />
-              <Spacer y={2} />
+            
+            <div className="form-group">
+              <label for="exampleInputPassword1">Username</label>
+              <input
+                type="text"
+                className="form-control mt-3"
+                id="exampleInputPassword1"
+                placeholder="username"
+                onChange={(e) => setUserName(e.target.value)}
+              />
+            </div>
             <div className="form-group">
               <label for="exampleInputPassword1">Password</label>
               <input

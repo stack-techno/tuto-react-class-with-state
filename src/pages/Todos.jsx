@@ -1,5 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import { TodoList } from "../components/TodoList";
+import Navbar from "../components/Navbar";
+import { CustomLoader } from "../components/shared/CustomLoader";
 const initialTodos = [
   {
     id: 1,
@@ -17,7 +19,7 @@ const initialTodos = [
     completed: true,
   },
 ];
-export const App = () => {
+export const Todos = () => {
   const [todos, setTodos] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [isDeleted, setIsDeleted] = useState(false);
@@ -71,6 +73,9 @@ export const App = () => {
   const handleRefresh = (e) => {
     fetchTodos();
   };
+  const todoSorted = ()=>{
+    return todos.slice().sort((a, b)=>b.completed -  a.completed )
+  }
   const handleSubmit = (e) => {
     e.preventDefault();
     const form = { title, completed: completed ? true : false };
@@ -91,6 +96,7 @@ export const App = () => {
   };
   return (
     <div className="App" ref={ref}>
+       <Navbar/>
       <div className="card">
         <h2>Liste des Tâches</h2>
       </div>
@@ -109,11 +115,7 @@ export const App = () => {
           </div>
         </div>
         {isLoading ? (
-          <div className="d-flex justify-content-center">
-            <div className="spinner-border" role="status">
-              <span className="visually-hidden">Loading...</span>
-            </div>
-          </div>
+          <CustomLoader/>
         ) : (
           <div className="row">
             <div className="col-md-6">
@@ -198,7 +200,7 @@ export const App = () => {
             </div>
             <div className="col-md-6">
               <TodoList
-                todos={todos}
+                todos={todoSorted()}
                 handleDelete={handleDelete}
                 isDeleted={isDeleted}
               />

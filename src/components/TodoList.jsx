@@ -1,8 +1,8 @@
 import React from "react";
 import PropTypes from "prop-types";
-
+import { Link, Navigate, useNavigate } from "react-router-dom";
 export const TodoList =(props)=>{
-  
+  const navigation = useNavigate()
   const alertDeleteTodo = () => {
     if (props.isDeleted) {
       return (
@@ -12,7 +12,9 @@ export const TodoList =(props)=>{
       );
     }
   };
-
+const handleDetail =(id)=>{
+   navigation(`/todo/${id}`)
+}
     return (
       <>
         {alertDeleteTodo()}
@@ -38,6 +40,18 @@ export const TodoList =(props)=>{
                   )}
                 </td>
                 <td>
+                <Link className="btn btn-primary" to={`/todo/${todo.id}`}>
+                    Detail
+                  </Link>
+                  {/* <button
+                    type="button"
+                    className="btn btn-primary"
+                    onClick={() => handleDetail(todo.id)}
+                  >
+                    Details
+                  </button> */}
+                </td>
+                <td>
                   <button
                     type="button"
                     className="btn btn-danger"
@@ -46,6 +60,7 @@ export const TodoList =(props)=>{
                     Supprimer
                   </button>
                 </td>
+               
               </tr>
             ))}
           </tbody>
